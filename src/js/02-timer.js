@@ -13,11 +13,11 @@ const timerInterfaceRefs = {
 
 }
 
-let CurrentDate = Date.now();
+const threeHoursInMs = 10800000;
+let CurrentDate = Date.now()+ threeHoursInMs;
 let dateChosen;
 let dateChosenMs;
 let counter;
-// console.log(CurrentDate);
 
 buttonDisable(Refs.startButton);
 buttonDisable(Refs.stopButton);
@@ -30,6 +30,7 @@ function dateCheck(event) {
     stopTimer();
     dateChosen = event.target.value;
     dateChosenMs = new Date(dateChosen).getTime();
+    console.log(dateChosenMs);
     if (dateChosenMs < CurrentDate) {
         alertShow()
     } else {
@@ -44,7 +45,7 @@ function startTimer() {
     buttonDisable(Refs.startButton);
     buttonEnable(Refs.stopButton);
     counter = setInterval(() => {
-        CurrentDate = Date.now();
+        CurrentDate = Date.now()+ threeHoursInMs;
         const timeDiferance = dateChosenMs - CurrentDate;
         const timeComponents = convertMs(timeDiferance);
         updateInterface(timeComponents);
